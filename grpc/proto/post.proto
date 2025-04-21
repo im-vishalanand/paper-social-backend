@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package post;
+
+option go_package = "github.com/im-vishalanand/paper-social-backend/grpc/proto/postpb";
+
+// Request message for fetching posts by user
+message ListPostsRequest {
+  string user_id = 1;
+}
+
+// Response message with multiple posts
+message ListPostsResponse {
+  repeated Post posts = 1;
+}
+
+// Post message
+message Post {
+  string id = 1;
+  string author_id = 2;
+  string content = 3;
+  int64 timestamp = 4; // Unix timestamp
+}
+
+service PostService {
+  rpc ListPostsByUser(ListPostsRequest) returns (ListPostsResponse);
+}
